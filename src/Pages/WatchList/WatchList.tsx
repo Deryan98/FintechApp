@@ -5,12 +5,17 @@ import {StockList} from 'Components/organisms/StockList/StockList';
 import {Header} from 'Components/atoms/Header';
 import {useNavigation} from '@react-navigation/native';
 import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
+import {useWebSocket} from 'Hooks/useWebSocket';
+import {useStocksStore} from 'Store/Stocks';
 
 type Props = {};
 
 export const WatchList = (props: Props) => {
-  // const {socket, unsubscribe} = useWebSocket();
+  const {socket, unsubscribe} = useWebSocket();
+  const {watchedStocks} = useStocksStore(state => state);
   const navigation = useNavigation();
+
+  console.log({watchedStocks});
   return (
     <>
       <Header
@@ -26,45 +31,7 @@ export const WatchList = (props: Props) => {
       />
       <SafeAVContainer>
         <BodyContainer>
-          <StockList
-            data={[
-              {
-                c: null,
-                p: 29793.91,
-                s: 'BINANCE:BTCUSDT',
-                t: 1698012636519,
-                v: 0.00211,
-              },
-              {
-                c: null,
-                p: 29793.92,
-                s: 'BINANCE:BTCUSDT',
-                t: 1698012636712,
-                v: 0.00232,
-              },
-              {
-                c: null,
-                p: 29793.91,
-                s: 'BINANCE:BTCUSDT',
-                t: 1698012636723,
-                v: 0.03772,
-              },
-              {
-                c: null,
-                p: 29793.92,
-                s: 'BINANCE:BTCUSDT',
-                t: 1698012636732,
-                v: 0.00408,
-              },
-              {
-                c: null,
-                p: 29793.91,
-                s: 'BINANCE:BTCUSDT',
-                t: 1698012637010,
-                v: 0.05983,
-              },
-            ]}
-          />
+          <StockList data={watchedStocks} />
         </BodyContainer>
       </SafeAVContainer>
     </>

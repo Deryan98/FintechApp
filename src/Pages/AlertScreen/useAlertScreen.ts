@@ -17,7 +17,6 @@ export const useAlertScreen = () => {
       const response = await axios.get(apiUrl);
       if (response.status === 200) {
         const data = response.data;
-        console.log(data);
         setRowData(data);
         transformStockSymbol();
       } else {

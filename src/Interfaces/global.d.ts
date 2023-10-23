@@ -1,9 +1,9 @@
 interface StockRealTime {
-  c: any;
-  p: number;
   s: string;
-  t: number;
-  v: number;
+  c?: any;
+  p?: number;
+  t?: number;
+  v?: number;
 }
 
 interface StockSymbol {
