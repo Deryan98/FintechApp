@@ -3,12 +3,12 @@ import {API_URL, API_KEY} from '@env';
 import axios from 'axios';
 
 export const useAlertScreen = () => {
-  // Define the API URL
-  const apiUrl = `${API_URL}/stock/symbol?exchange=US&mic=XNYS&token=${API_KEY}`;
-  //`${API_URL}/stock/metric?symbol=AAPL&metric=all&token=${API_KEY}`;
+  const apiUrl = `${API_URL}/stock/symbol?exchange=US&currency=USD&mic=XNYS&token=${API_KEY}`;
 
-  const [stocks, setStocks] = useState([]);
+  const [rawData, setRowData] = useState<StockSymbol[]>([]);
   const [isLoadig, setIsLoadig] = useState(false);
+
+  const [stockSymbols, setStockSymbols] = useState<LabelValue[]>([]);
 
   const fetchStockData = async () => {
     setIsLoadig(true);
@@ -18,28 +18,35 @@ export const useAlertScreen = () => {
       if (response.status === 200) {
         const data = response.data;
         console.log(data);
-        setStocks(data);
-        setIsLoadig(false);
+        setRowData(data);
+        transformStockSymbol();
       } else {
         console.error(`Error: ${response.status}`);
-        setIsLoadig(false);
       }
     } catch (error) {
       console.log('catch');
-      console.error(`Error: ${error.message}`);
-      setIsLoadig(false);
+      console.error(`Error: ${error?.message}`);
     } finally {
       console.log('finally');
       setIsLoadig(false);
     }
   };
+  const transformStockSymbol = () => {
+    setStockSymbols(
+      rawData.map(({description, symbol}) => ({
+        label: description,
+        value: symbol,
+      })),
+    );
+  };
 
   useEffect(() => {
-    if (stocks.length === 0) fetchStockData();
-  }, [stocks]);
+    if (stockSymbols.length === 0) fetchStockData();
+  }, [stockSymbols]);
 
   return {
-    stocks,
+    stockSymbols,
+    setStockSymbols,
     isLoadig,
   };
 };
