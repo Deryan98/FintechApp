@@ -1,14 +1,26 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AlertScreen from '../Pages/AlertScreen';
-import WatchList from '../Pages/WatchList';
-import GraphScreen from '../Pages/GraphScreen';
+import {AlertScreen} from 'Pages/AlertScreen';
+import {BottomTabs} from './BottomTabs';
 
 const Stack = createNativeStackNavigator();
 
 export const MainStack = () => (
-  <Stack.Navigator initialRouteName="Watchlist">
-    <Stack.Screen name="Alert" component={AlertScreen} />
-    <Stack.Screen name="Watchlist" component={WatchList} />
-    <Stack.Screen name="Graph" component={GraphScreen} />
+  <Stack.Navigator
+    initialRouteName="Watchlist"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="BottomTabs" component={BottomTabs} />
+    <Stack.Screen
+      name="Alert"
+      component={AlertScreen}
+      options={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: '#1a202c',
+        },
+        headerTintColor: 'white',
+      }}
+    />
   </Stack.Navigator>
 );

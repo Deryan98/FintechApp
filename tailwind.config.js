@@ -2,6 +2,18 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontSize: {
+      '8font': '8px',
+      '10font': '10px',
+      '12font': '12px',
+      '14font': '14px',
+      '16font': '16px',
+      '18font': '18px',
+      '20font': '20px',
+      '22font': '22px',
+      '24font': '24px',
+      '26font': '26px',
+    },
     colors: {
       transparent: 'transparent',
 

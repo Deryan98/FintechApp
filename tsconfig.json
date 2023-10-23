@@ -36,6 +36,9 @@
       "Context/*": [
         "Context/*"
       ],
+      "Store/*": [
+        "Store/*"
+      ],
       "Assets/*": [
         "Assets/*"
       ],
