@@ -13,7 +13,6 @@ export const useAlertScreen = () => {
   const fetchStockData = async () => {
     setIsLoadig(true);
     try {
-      console.log('try');
       const response = await axios.get(apiUrl);
       if (response.status === 200) {
         const data = response.data;
@@ -23,10 +22,8 @@ export const useAlertScreen = () => {
         console.error(`Error: ${response.status}`);
       }
     } catch (error) {
-      console.log('catch');
       console.error(`Error: ${error?.message}`);
     } finally {
-      console.log('finally');
       setIsLoadig(false);
     }
   };

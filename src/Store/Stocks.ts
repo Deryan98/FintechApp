@@ -10,7 +10,7 @@ type StocksState = {
   setSymbol: (symbol: Symbol) => void;
   watchedStocks: StockRealTime[];
   setWatchedStock: (watchedStock: StockRealTime) => void;
-  editWatchedStock: (watchedStock: StockRealTime) => void;
+  editWatchedStock: (newItem: StockRealTime) => void;
 };
 
 export const useStocksStore = create<StocksState>((set, get) => ({
@@ -21,11 +21,13 @@ export const useStocksStore = create<StocksState>((set, get) => ({
     set({watchedStocks: [...get().watchedStocks, watchedStock]}),
   editWatchedStock: newItem =>
     set(({watchedStocks}) => {
+      console.log('funca');
       const indexToChange = watchedStocks
         .map(item => item.s === newItem.s)
         .indexOf(true);
       const newItems = [...watchedStocks];
       newItems[indexToChange] = newItem;
+      console.log('funca2');
       return {watchedStocks: newItems};
     }),
 }));
