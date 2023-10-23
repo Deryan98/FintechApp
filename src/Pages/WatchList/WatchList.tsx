@@ -11,11 +11,10 @@ import {useStocksStore} from 'Store/Stocks';
 type Props = {};
 
 export const WatchList = (props: Props) => {
-  const {socket, unsubscribe} = useWebSocket();
+  useWebSocket();
   const {watchedStocks} = useStocksStore(state => state);
   const navigation = useNavigation();
 
-  console.log({watchedStocks});
   return (
     <>
       <Header
