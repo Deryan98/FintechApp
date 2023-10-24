@@ -15,6 +15,18 @@ export const WatchList = (props: Props) => {
   const {watchedStocks} = useStocksStore(state => state);
   const navigation = useNavigation();
 
+  const renderEmptyComponent = () => {
+    if (watchedStocks.length === 0)
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text className="text-white font-semi text-18font text-center">
+            No stocks watched yet!
+          </Text>
+        </View>
+      );
+    return null;
+  };
+
   return (
     <>
       <Header
@@ -30,6 +42,8 @@ export const WatchList = (props: Props) => {
       />
       <SafeAVContainer>
         <BodyContainer>
+          {renderEmptyComponent()}
+
           <StockList data={watchedStocks} />
         </BodyContainer>
       </SafeAVContainer>

@@ -1,12 +1,15 @@
+import {FC} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {StockCard} from 'Components/molecules/StockCard';
-import React, {FC} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList} from 'react-native';
 
 interface StockListProps {
   data: StockRealTime[];
 }
 
 export const StockList: FC<StockListProps> = ({data}) => {
+  const navigation = useNavigation();
+
   return (
     <FlatList
       data={data}
@@ -15,7 +18,16 @@ export const StockList: FC<StockListProps> = ({data}) => {
       className="p-4 "
       keyExtractor={({t}: any) => t}
       renderItem={({index, item}) => {
-        return <StockCard {...item} />;
+        return (
+          <StockCard
+            {...item}
+            onPress={() => {
+              navigation.navigate('Graph', {
+                symbol: item.s,
+              });
+            }}
+          />
+        );
       }}
     />
   );

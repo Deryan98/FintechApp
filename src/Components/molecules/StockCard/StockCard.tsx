@@ -1,10 +1,23 @@
 import {P} from 'Components/atoms/Text/Text';
 import {FC} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
-export const StockCard: FC<StockRealTime> = ({c, p, s, t, v}) => {
+interface StockCardProps extends StockRealTime {
+  onPress: any;
+}
+
+export const StockCard: FC<StockCardProps> = ({
+  c,
+  p = '',
+  s,
+  t,
+  v = '',
+  onPress,
+}) => {
   return (
-    <View className="w-[47%] h-[100] items-center justify-center p-5 bg-gray-500 rounded-lg my-2 mr-5">
+    <TouchableOpacity
+      onPress={onPress}
+      className="w-[47%] h-[100] items-center justify-center p-5 bg-gray-500 rounded-lg my-2 mr-5">
       <View className="w-full ">
         <Text className="text-black font-bold text-14font">{s}</Text>
       </View>
@@ -15,6 +28,6 @@ export const StockCard: FC<StockRealTime> = ({c, p, s, t, v}) => {
       <View className="w-full ">
         <Text className="text-black font-bold text-14font">{v}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

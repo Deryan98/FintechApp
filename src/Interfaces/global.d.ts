@@ -16,6 +16,24 @@ interface StockSymbol {
   type: string;
 }
 
+interface RawStockCandle {
+  s: string;
+  c: number[];
+  h: number[];
+  l: number[];
+  o: number[];
+  t: number[];
+  v: number[];
+}
+
+interface StockCandle {
+  x: number;
+  close: number;
+  shadowH: number;
+  shadowL: number;
+  open: number;
+}
+
 interface LabelValue {
   label: string;
   value: string;
