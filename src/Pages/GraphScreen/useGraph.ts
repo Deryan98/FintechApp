@@ -12,10 +12,10 @@ const initialRowDataState = {
   v: [],
 };
 export const useGraph = (symbol: string) => {
-  const apiUrl = `${API_URL}/stock/candle?symbol=AAPL&resolution=30&from=1698100000&to=1698117785&token=${API_KEY}`;
+  const apiUrl = `${API_URL}/stock/candle?symbol=${symbol}&resolution=30&from=1698000000&to=1698117785&token=${API_KEY}`;
 
   const [rawData, setRowData] = useState<RawStockCandle>(initialRowDataState);
-  const [isLoadig, setIsLoadig] = useState(false);
+  const [isLoadig, setIsLoadig] = useState(true);
 
   const [stockCandles, setStockCandles] = useState<StockCandle[]>([]);
 
@@ -68,5 +68,6 @@ export const useGraph = (symbol: string) => {
   return {
     isLoadig,
     stockCandles,
+    rawData,
   };
 };

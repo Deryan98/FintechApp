@@ -10,13 +10,27 @@ type Props = {};
 export const GraphScreen = (props: Props) => {
   const route = useRoute();
   const symbol = route.params?.symbol;
-  const {isLoadig, stockCandles} = useGraph(symbol);
+  console.log('GraphScreen  ', symbol);
+  const {isLoadig, stockCandles, rawData} = useGraph(symbol);
 
   if (isLoadig)
     return (
       <SafeAVContainer>
         <BodyContainer>
           <ActivityIndicator />
+        </BodyContainer>
+      </SafeAVContainer>
+    );
+
+  if (rawData.s === 'no_data')
+    return (
+      <SafeAVContainer>
+        <BodyContainer>
+          <View style={{flex: 2, margin: 20}}>
+            <Text className="text-white text-22font h-[40px] text-center mb-10">
+              No data found
+            </Text>
+          </View>
         </BodyContainer>
       </SafeAVContainer>
     );
