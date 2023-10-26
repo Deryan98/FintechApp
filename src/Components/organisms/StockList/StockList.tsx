@@ -16,7 +16,7 @@ export const StockList: FC<StockListProps> = ({data}) => {
       numColumns={2}
       scrollEnabled
       className="p-4 "
-      keyExtractor={({t}: any) => t}
+      keyExtractor={({s}: any) => s}
       renderItem={({index, item}) => {
         return (
           <StockCard

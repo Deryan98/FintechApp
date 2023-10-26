@@ -5,22 +5,32 @@ import * as _ from 'lodash';
 import {useDebounce} from './useDebounce';
 
 export const useWebSocket = () => {
+  //set socket config
   const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`);
+
+  //retrieve states from zustand
   const {symbols, editWatchedStock} = useStocksStore(state => state);
 
+  //state to manage remote stocks
   const [stocks, setStocks] = useState([]);
+
+  // debounced stocks after a time has passed
   const stocksDbc = useDebounce(stocks);
 
-  // Unsubscribe
+  // Unsubscribe metrod for socket event
   const unsubscribe = function (symbol: string) {
     socket.send(JSON.stringify({type: 'unsubscribe', symbol: symbol}));
   };
 
+  //
   const saveSocketData = async (stocks: StockRealTime[]) => {
-    // Obtenemos una lista de todos los valores únicos en la propiedad "s"
+    // get a list of all unique values with 's' property
     const valoresUnicosS = _.uniq(stocks.map(item => item.s));
+
+    //array fot preparing stocks
     const preStocks = [];
-    // Creamos una lista de objetos que coincidan con el valor aleatorio en la propiedad "s"
+
+    // creating an object list that matched the aleatory value for 's' property
     for (let i = 0; i < valoresUnicosS.length; i++) {
       const elementosSeleccionados = stocks.filter(
         item => item.s === valoresUnicosS[i],
@@ -35,37 +45,30 @@ export const useWebSocket = () => {
   };
 
   useEffect(() => {
+    if (stocksDbc.length === 0) return;
     saveSocketData(stocksDbc);
   }, [stocksDbc]);
 
   useEffect(() => {
     if (symbols.length === 0) return;
     // Connection opened -> Subscribe
-    socket.addEventListener('open', function (event) {
+    socket.onopen = function (event) {
       console.log('open');
-      for (let i = 0; i < symbols.length; i++) {
-        console.log(symbols.length, ' subscripciones');
-        socket.send(
-          JSON.stringify({type: 'subscribe', symbol: symbols[i].symbol}),
-        );
-      }
-      socket.send(
-        JSON.stringify({type: 'subscribe', symbol: 'BINANCE:BTCUSDT'}),
-      );
-    });
-
+      symbols.forEach(({symbol}) => {
+        socket.send(JSON.stringify({type: 'subscribe', symbol}));
+      });
+    };
     // Listen for messages
-    socket.addEventListener('message', function (event) {
-      console.log('Message from server \n\n');
+    socket.onmessage = function (event) {
+      console.log('Message from server');
       const {data} = JSON.parse(event.data);
       setStocks(data);
-    });
+    };
 
     return () => {
       for (let i = 0; i < symbols.length; i++) {
         console.log(symbols.length, 'unsubscribe');
         unsubscribe(symbols[i].symbol);
-        unsubscribe('BINANCE:BTCUSDT');
       }
     };
   }, [symbols]);

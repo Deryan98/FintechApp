@@ -14,9 +14,9 @@ type StocksState = {
 };
 
 export const useStocksStore = create<StocksState>((set, get) => ({
-  symbols: [],
+  symbols: [{symbol: 'BINANCE:BTCUSDT', targetPrice: '0'}],
   setSymbol: symbol => set({symbols: [...get().symbols, symbol]}),
-  watchedStocks: [],
+  watchedStocks: [{s: 'BINANCE:BTCUSDT'}],
   setWatchedStock: watchedStock =>
     set({watchedStocks: [...get().watchedStocks, watchedStock]}),
   editWatchedStock: newItem =>
@@ -28,6 +28,7 @@ export const useStocksStore = create<StocksState>((set, get) => ({
       const newItems = [...watchedStocks];
       newItems[indexToChange] = newItem;
       console.log('funca2');
+      console.log({newItems});
       return {watchedStocks: newItems};
     }),
 }));
