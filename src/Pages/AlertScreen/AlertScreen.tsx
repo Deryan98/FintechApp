@@ -24,16 +24,18 @@ export const AlertScreen = (props: Props) => {
   const {symbols, setSymbol, setWatchedStock} = useStocksStore(state => state);
   const [error, setError] = useState<string>('');
   const navigation = useNavigation();
+
   const validateForm: () => boolean = () => {
     const parsedTargetPrice = Number.parseFloat(targetPrice);
     setError('');
-    if (value === null || targetPrice === '' || parsedTargetPrice === 0) {
+    if (value === '' || targetPrice === '' || parsedTargetPrice === 0) {
       setError(
         'There are some errors in the form, please validate them before submitting ',
       );
       return false;
     } else if (symbols.find(s => s.symbol === value)) {
       setError('The chosen symbol already exists on the watched stocks ');
+      return false;
     }
     return true;
   };
