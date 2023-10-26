@@ -1,19 +1,17 @@
 import {Button, Text, View} from 'react-native';
-
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {StockList} from 'Components/organisms/StockList/StockList';
 import {Header} from 'Components/atoms/Header';
-import {useNavigation} from '@react-navigation/native';
 import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
 import {useWebSocket} from 'Hooks/useWebSocket';
 import {useStocksStore} from 'Store/Stocks';
 
-type Props = {};
+type Props = NativeStackScreenProps<MainStackParamList, 'Watchlist'>;
 
-export const WatchList = (props: Props) => {
+export const WatchList = ({navigation}: Props) => {
   useWebSocket();
   const {watchedStocks} = useStocksStore(state => state);
-  const navigation = useNavigation();
 
   const renderEmptyComponent = () => {
     if (watchedStocks.length === 0)

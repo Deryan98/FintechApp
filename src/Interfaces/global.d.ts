@@ -1,3 +1,8 @@
+type MainStackParamList = {
+  Watchlist: undefined;
+  Graph: {symbol: string};
+  Alert: undefined;
+};
 interface StockRealTime {
   s: string;
   c?: any;

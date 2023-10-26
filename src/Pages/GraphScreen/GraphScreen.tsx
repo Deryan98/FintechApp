@@ -1,3 +1,4 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ActivityIndicator, Text, View, processColor} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {BodyContainer} from 'Components/atoms/BodyContainer';
@@ -5,12 +6,10 @@ import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {CandleStickChart} from 'react-native-charts-wrapper';
 import {useGraph} from './useGraph';
 
-type Props = {};
+type Props = NativeStackScreenProps<MainStackParamList, 'Graph'>;
 
-export const GraphScreen = (props: Props) => {
-  const route = useRoute();
-  const symbol = route.params?.symbol;
-  console.log('GraphScreen  ', symbol);
+export const GraphScreen = ({route: {params}}: Props) => {
+  const symbol = params?.symbol;
   const {isLoadig, stockCandles, rawData} = useGraph(symbol);
 
   if (isLoadig)

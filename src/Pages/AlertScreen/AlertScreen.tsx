@@ -1,4 +1,5 @@
 import {BodyContainer} from 'Components/atoms/BodyContainer';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {useState} from 'react';
 import {
@@ -14,7 +15,7 @@ import {useAlertScreen} from './useAlertScreen';
 import {useStocksStore} from 'Store/Stocks';
 import {useNavigation} from '@react-navigation/native';
 
-type Props = {};
+type Props = NativeStackScreenProps<MainStackParamList, 'Alert'>;
 
 export const AlertScreen = (props: Props) => {
   const {stockSymbols, setStockSymbols, isLoadig} = useAlertScreen();

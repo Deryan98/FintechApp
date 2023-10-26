@@ -3,7 +3,7 @@ import {AlertScreen} from 'Pages/AlertScreen';
 import {WatchList} from 'Pages/WatchList';
 import {GraphScreen} from 'Pages/GraphScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
 export const MainStack = () => (
   <Stack.Navigator
