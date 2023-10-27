@@ -1,4 +1,4 @@
-import {Button, Text, View} from 'react-native';
+import {Button, StatusBar, Text, View} from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {StockList} from 'Components/organisms/StockList/StockList';
@@ -27,6 +27,7 @@ export const WatchList = ({navigation}: Props) => {
 
   return (
     <>
+      <StatusBar barStyle="light-content" />
       <Header
         center={
           <Text className="text-white font-bold text-24font">Watch List</Text>

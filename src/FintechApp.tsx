@@ -1,3 +1,4 @@
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {PropsWithChildren} from 'react';
 import {MainStack} from './Navigation/MainStack';
@@ -5,7 +6,9 @@ import {MainStack} from './Navigation/MainStack';
 type Props = {};
 
 const AppState = ({children}: PropsWithChildren) => (
-  <NavigationContainer>{children}</NavigationContainer>
+  <SafeAreaProvider>
+    <NavigationContainer>{children}</NavigationContainer>
+  </SafeAreaProvider>
 );
 
 const FintechApp = (props: Props) => {

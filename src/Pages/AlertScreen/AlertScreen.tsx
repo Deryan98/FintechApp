@@ -25,6 +25,7 @@ export const AlertScreen = (props: Props) => {
   const {symbols, setSymbol, setWatchedStock} = useStocksStore(state => state);
   const [error, setError] = useState<string>('');
   const navigation = useNavigation();
+  const [isShownModal, setIsShownModal] = useState<boolean>(false);
 
   const validateForm: () => boolean = () => {
     const parsedTargetPrice = Number.parseFloat(targetPrice);
@@ -79,6 +80,8 @@ export const AlertScreen = (props: Props) => {
             <Text className="text-white text-18font h-[35px]">Stock</Text>
             <DropDownPicker
               style={{height: 50, backgroundColor: '#a0aec0'}}
+              onOpen={() => setIsShownModal(true)}
+              onClose={() => setIsShownModal(false)}
               open={open}
               value={value}
               items={stockSymbols}
@@ -88,31 +91,35 @@ export const AlertScreen = (props: Props) => {
               searchable
             />
           </View>
-          <View className="w-full mb-10">
-            <Text className="text-white text-18font h-[35px]">
-              Target Price
-            </Text>
-            <TextInput
-              className="h-[50px] w-full bg-gray-500 rounded-md px-[10]"
-              // style={{alignItems: 'center', paddingHorizontal: 10}}
-              value={targetPrice}
-              onChangeText={onChangeTargetPrice}
-              placeholder="Price Alert"
-              keyboardType="numeric"
-            />
-          </View>
-          <View className="mb-10">
-            {error.length > 0 && (
-              <Text className="text-red-500 font-bold text-14font">
-                Error: {error}
-              </Text>
-            )}
-          </View>
-          <TouchableOpacity
-            onPress={handleSubmit}
-            className="w-full bg-purple-700 rounded-md h-[50px] items-center justify-center ">
-            <Text className="text-white text-18font ">Add Stock</Text>
-          </TouchableOpacity>
+          {!isShownModal && (
+            <>
+              <View className="w-full mb-10">
+                <Text className="text-white text-18font h-[35px]">
+                  Target Price
+                </Text>
+                <TextInput
+                  className="h-[50px] w-full bg-gray-500 rounded-md px-[10] -z-10"
+                  // style={{alignItems: 'center', paddingHorizontal: 10}}
+                  value={targetPrice}
+                  onChangeText={onChangeTargetPrice}
+                  placeholder="Price Alert"
+                  keyboardType="numeric"
+                />
+              </View>
+              <View className="mb-10">
+                {error.length > 0 && (
+                  <Text className="text-red-500 font-bold text-14font">
+                    Error: {error}
+                  </Text>
+                )}
+              </View>
+              <TouchableOpacity
+                onPress={handleSubmit}
+                className="w-full bg-purple-700 rounded-md h-[50px] items-center justify-center ">
+                <Text className="text-white text-18font ">Add Stock</Text>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </BodyContainer>
     </SafeAVContainer>
