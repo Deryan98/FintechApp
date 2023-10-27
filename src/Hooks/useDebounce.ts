@@ -6,9 +6,10 @@ export const useDebounce = (value: any): any => {
   useEffect(() => {
     const typingTimer = setTimeout(() => {
       setDebouncedValue(value ?? '');
-    }, 100);
+    }, 300);
 
     return () => {
+      console.log('clearTimeout');
       clearTimeout(typingTimer);
     };
   }, [value]);

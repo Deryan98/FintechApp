@@ -6,38 +6,27 @@ type Symbol = {
 };
 
 type StocksState = {
-  symbols: Symbol[];
+  symbols: Map<string, Symbol>;
   setSymbol: (symbol: Symbol) => void;
-  watchedStocks: StockRealTime[];
+  watchedStocks: Map<string, StockRealTime>;
   setWatchedStock: (watchedStock: StockRealTime) => void;
   editWatchedStock: (newItem: StockRealTime) => void;
 };
 
-const initialState = {
-  symbols: [
-    {symbol: 'BINANCE:BTCUSDT', targetPrice: '20'},
-    {symbol: 'AAPL', targetPrice: '10'},
-    {symbol: 'IC MARKETS:1', targetPrice: '30'},
-  ],
-  watchedStocks: [{s: 'BINANCE:BTCUSDT'}, {s: 'AAPL'}, {s: 'IC MARKETS:1'}],
-};
-
 export const useStocksStore = create<StocksState>((set, get) => ({
-  symbols: initialState.symbols,
-  setSymbol: symbol => set({symbols: [...get().symbols, symbol]}),
-  watchedStocks: initialState.watchedStocks,
+  symbols: new Map([
+    ['BINANCE:BTCUSDT', {symbol: 'BINANCE:BTCUSDT', targetPrice: '20'}],
+    ['AAPL', {symbol: 'AAPL', targetPrice: '20'}],
+    ['IC MARKETS:1', {symbol: 'IC MARKETS:1', targetPrice: '20'}],
+  ]),
+  setSymbol: symbol => set({symbols: get().symbols.set(symbol.symbol, symbol)}),
+  watchedStocks: new Map([
+    ['BINANCE:BTCUSDT', {s: 'BINANCE:BTCUSDT'}],
+    ['AAPL', {s: 'AAPL'}],
+    ['IC MARKETS:1', {s: 'IC MARKETS:1'}],
+  ]),
   setWatchedStock: watchedStock =>
-    set({watchedStocks: [...get().watchedStocks, watchedStock]}),
+    set({watchedStocks: get().watchedStocks.set(watchedStock.s, watchedStock)}),
   editWatchedStock: newItem =>
-    set(({watchedStocks}) => {
-      console.log('funca');
-      const indexToChange = watchedStocks
-        .map(item => item.s === newItem.s)
-        .indexOf(true);
-      const newItems = [...watchedStocks];
-      newItems[indexToChange] = newItem;
-      console.log('funca2');
-      console.log({newItems});
-      return {watchedStocks: [...newItems]};
-    }),
+    set({watchedStocks: get().watchedStocks.set(newItem.s, newItem)}),
 }));

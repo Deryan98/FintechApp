@@ -14,7 +14,7 @@ export const WatchList = ({navigation}: Props) => {
   const {watchedStocks} = useStocksStore(state => state);
 
   const renderEmptyComponent = () => {
-    if (watchedStocks.length === 0)
+    if (watchedStocks.size === 0)
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text className="text-white font-semi text-18font text-center">
@@ -42,7 +42,7 @@ export const WatchList = ({navigation}: Props) => {
         <BodyContainer>
           {renderEmptyComponent()}
 
-          <StockList data={watchedStocks} />
+          <StockList data={Array.from(watchedStocks.values())} />
         </BodyContainer>
       </SafeAVContainer>
     </>

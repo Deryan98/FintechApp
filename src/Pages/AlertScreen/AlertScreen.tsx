@@ -34,7 +34,7 @@ export const AlertScreen = (props: Props) => {
         'There are some errors in the form, please validate them before submitting ',
       );
       return false;
-    } else if (symbols.find(s => s.symbol === value)) {
+    } else if (symbols.get(value)) {
       setError('The chosen symbol already exists on the watched stocks ');
       return false;
     }
@@ -44,7 +44,7 @@ export const AlertScreen = (props: Props) => {
   const handleSubmit = () => {
     const isValid = validateForm();
     if (!isValid) return;
-    if (symbols.length === 0) setWatchedStock({s: 'BINANCE:BTCUSDT'});
+    if (symbols.size === 0) setWatchedStock({s: 'BINANCE:BTCUSDT'});
     setSymbol({symbol: value!, targetPrice});
     setWatchedStock({s: value});
     navigation.goBack();
