@@ -52,10 +52,10 @@ export const useWebSocket = () => {
       Array.from(symbols.values()).forEach(({symbol}) => {
         socket.send(JSON.stringify({type: 'subscribe', symbol}));
       });
+      console.log(symbols.size, ' opened');
     };
     // Listen for messages
     socket.onmessage = function (event) {
-      console.log('Message from server');
       const {data} = JSON.parse(event.data);
       setStocks(data);
     };
@@ -65,10 +65,11 @@ export const useWebSocket = () => {
     };
 
     return () => {
+      console.log('close');
       Array.from(symbols.values()).forEach(({symbol}) => {
         unsubscribe(symbol);
       });
-      console.log(symbols.size, 'unsubscribe');
+      console.log(symbols.size, ' closed');
     };
-  }, []);
+  }, [symbols.size]);
 };

@@ -9,7 +9,6 @@ export const useDebounce = (value: any): any => {
     }, 500);
 
     return () => {
-      console.log('clearTimeout');
       clearTimeout(typingTimer);
     };
   }, [value]);
