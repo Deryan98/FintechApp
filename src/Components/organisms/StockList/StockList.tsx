@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StockCard} from 'Components/molecules/StockCard';
-import {FlatList, Text, View} from 'react-native';
+import {Button, FlatList, Text, TouchableOpacity, View} from 'react-native';
 
 interface StockListProps {
   data: StockRealTime[];
@@ -18,11 +18,11 @@ export const StockList: FC<StockListProps> = ({data}) => {
       className="p-4 "
       keyExtractor={({s}: any) => s}
       ListHeaderComponent={
-        <View className="bg-red-900 rounded-2xl items-center justify-center h-[40px] mb-5">
-          <Text className="text-white text-14font  text-center ">
-            Press any stock to see candles graph
-          </Text>
-        </View>
+        <TouchableOpacity
+          className="bg-purple-800 w-full h-[50] justify-center my-5 rounded-lg"
+          onPress={() => navigation.navigate('Alert')}>
+          <Text className="text-white font-bold text-center">Add Alert</Text>
+        </TouchableOpacity>
       }
       renderItem={({index, item}) => {
         return (

@@ -3,7 +3,11 @@ type MainStackParamList = {
   Graph: {symbol: string};
   Alert: undefined;
   Login: undefined;
+  Loading: undefined;
 };
+
+type LoginStatus = 'checking' | 'auth' | 'not-auth';
+
 interface StockRealTime {
   s: string;
   c?: any;
