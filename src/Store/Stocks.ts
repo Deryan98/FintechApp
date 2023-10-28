@@ -3,6 +3,7 @@ import {create} from 'zustand';
 type Symbol = {
   symbol: string;
   targetPrice: string;
+  notified?: boolean;
 };
 
 type StocksState = {

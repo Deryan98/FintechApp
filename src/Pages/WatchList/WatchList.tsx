@@ -6,13 +6,11 @@ import {Header} from 'Components/atoms/Header';
 import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
 import {useWebSocket} from 'Hooks/useWebSocket';
 import {useStocksStore} from 'Store/Stocks';
-import {usePushNotifications} from 'Hooks/usePushNotifications';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Watchlist'>;
 
 export const WatchList = ({navigation}: Props) => {
   useWebSocket();
-  const {pushNotification} = usePushNotifications();
   const {watchedStocks} = useStocksStore(state => state);
 
   const renderEmptyComponent = () => {

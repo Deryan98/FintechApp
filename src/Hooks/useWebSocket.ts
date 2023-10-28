@@ -3,18 +3,25 @@ import {useStocksStore} from 'Store/Stocks';
 import {useEffect, useState} from 'react';
 import * as _ from 'lodash';
 import {useDebounce} from './useDebounce';
+import PushNotification from 'react-native-push-notification';
 
 export const useWebSocket = () => {
-  //set socket config
-
   //retrieve states from zustand
-  const {symbols, editWatchedStock} = useStocksStore(state => state);
+  const {symbols, editWatchedStock, setSymbol} = useStocksStore(state => state);
 
   //state to manage remote stocks
   const [stocks, setStocks] = useState([]);
 
   // debounced stocks after a time has passed
   const stocksDbc = useDebounce(stocks);
+
+  const notifyHighPrice = ({s, p}: StockRealTime) => {
+    console.log('notifyHighPrice doing');
+    PushNotification.localNotification({
+      channelId: 'stock-alert',
+      title: `${s} stock reached $${p}`,
+    });
+  };
 
   // transform data, selecting values and saving state
   const saveSocketData = async (stocksP: StockRealTime[]) => {
@@ -32,6 +39,24 @@ export const useWebSocket = () => {
       });
       if (preStocks.length === 0) return;
       preStocks.forEach(preStock => {
+        console.log('enn foer');
+        console.log(symbols.get(preStock.s));
+        const symbol = symbols.get(preStock.s);
+        const targetPriceP = Number.parseFloat(symbol?.targetPrice!);
+
+        if (!symbol?.notified) {
+          if (targetPriceP <= preStock.p!) {
+            console.log(
+              'preStock.p: ',
+              preStock.p,
+              ' && targetPriceP: ',
+              targetPriceP,
+            );
+            setSymbol({...symbol!, notified: true});
+            notifyHighPrice(preStock);
+          }
+        }
+
         editWatchedStock(preStock);
       });
     } catch (error) {
