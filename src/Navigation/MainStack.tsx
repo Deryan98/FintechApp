@@ -5,14 +5,28 @@ import {GraphScreen} from 'Pages/GraphScreen';
 import {LoginScreen} from 'Pages/LoginScreen';
 import {LoadingScreen} from 'Pages/LoadingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import {useAuthStore} from 'Store/Auth';
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
-// const token = await AsyncStorage.getItem('@token');
-
 export const MainStack = () => {
-  let loginStatus: LoginStatus = 'checking';
+  const [token, setToken] = useState<string | null>(null);
+  const {authStatus, setAuthStatus} = useAuthStore(state => state);
+
+  useEffect(() => {
+    const retrieveToken = async () => {
+      const tokenResponse = await AsyncStorage.getItem('@token');
+      setToken(tokenResponse);
+    };
+
+    retrieveToken();
+  }, []);
+
+  useEffect(() => {
+    if (!token) setAuthStatus('not-auth');
+    else setAuthStatus('auth');
+  }, [token]);
 
   return (
     <Stack.Navigator
@@ -24,32 +38,34 @@ export const MainStack = () => {
         },
         headerTintColor: 'white',
       }}>
-      <Stack.Screen
-        name="Loading"
-        component={LoadingScreen}
-        options={{headerShown: false}}
-      />
-      {/* {loginStatus === 'auth' && ( */}
-      <>
+      {authStatus === 'checking' && (
         <Stack.Screen
-          name="Watchlist"
-          component={WatchList}
+          name="Loading"
+          component={LoadingScreen}
           options={{headerShown: false}}
         />
+      )}
+      {authStatus === 'not-auth' && (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+        </>
+      )}
+      {authStatus === 'auth' && (
+        <>
+          <Stack.Screen
+            name="Watchlist"
+            component={WatchList}
+            options={{headerShown: false}}
+          />
 
-        <Stack.Screen name="Graph" component={GraphScreen} />
-        <Stack.Screen name="Alert" component={AlertScreen} />
-      </>
-      {/* )} */}
-      {/* {loginStatus === 'not-auth' && ( */}
-      <>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{headerShown: false}}
-        />
-      </>
-      {/* )} */}
+          <Stack.Screen name="Graph" component={GraphScreen} />
+          <Stack.Screen name="Alert" component={AlertScreen} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

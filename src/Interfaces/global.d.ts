@@ -6,7 +6,7 @@ type MainStackParamList = {
   Loading: undefined;
 };
 
-type LoginStatus = 'checking' | 'auth' | 'not-auth';
+type AuthStatus = 'checking' | 'auth' | 'not-auth';
 
 interface StockRealTime {
   s: string;

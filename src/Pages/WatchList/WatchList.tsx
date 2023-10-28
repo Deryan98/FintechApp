@@ -7,6 +7,8 @@ import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
 import {useWebSocket} from 'Hooks/useWebSocket';
 import {useStocksStore} from 'Store/Stocks';
 import {useAuth0} from 'react-native-auth0';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useAuthStore} from 'Store/Auth';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Watchlist'>;
 
@@ -14,16 +16,20 @@ export const WatchList = ({navigation}: Props) => {
   useWebSocket();
   const {watchedStocks} = useStocksStore(state => state);
   const {clearSession, user} = useAuth0();
+  const {setAuthStatus} = useAuthStore(state => state);
 
   const loggedIn = user !== undefined && user !== null;
 
   console.log({user});
 
   const onLogout = async () => {
+    setAuthStatus('checking');
     try {
       await clearSession();
-      navigation.replace('Login');
+      await AsyncStorage.removeItem('@token');
+      setAuthStatus('not-auth');
     } catch (e) {
+      setAuthStatus('auth');
       console.log(e);
     }
   };

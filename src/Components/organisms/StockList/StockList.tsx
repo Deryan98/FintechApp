@@ -19,7 +19,7 @@ export const StockList: FC<StockListProps> = ({data}) => {
       keyExtractor={({s}: any) => s}
       ListHeaderComponent={
         <TouchableOpacity
-          className="bg-purple-800 w-full h-[50] justify-center my-5 rounded-lg"
+          className="bg-purple-800 w-full h-[50] justify-center mb-2 rounded-lg"
           onPress={() => navigation.navigate('Alert')}>
           <Text className="text-white font-bold text-center">Add Alert</Text>
         </TouchableOpacity>

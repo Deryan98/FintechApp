@@ -3,23 +3,24 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useAuth0} from 'react-native-auth0';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useAuthStore} from 'Store/Auth';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Login'>;
 
 export const LoginScreen = ({navigation}: Props) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   const {authorize, clearSession, user, error, isLoading} = useAuth0();
+  const {setAuthStatus} = useAuthStore(state => state);
 
   const onLogin = async () => {
+    setAuthStatus('checking');
     try {
       const response = await authorize();
       if (response) {
         await AsyncStorage.setItem('@token', response.idToken);
-        navigation.replace('Watchlist');
-      }
+        setAuthStatus('auth');
+      } else setAuthStatus('not-auth');
     } catch (e) {
+      setAuthStatus('not-auth');
       console.log(e);
     }
   };
