@@ -16,7 +16,11 @@ export const MainStack = () => (
       },
       headerTintColor: 'white',
     }}>
-    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      options={{headerShown: false}}
+    />
     <Stack.Screen
       name="Watchlist"
       component={WatchList}

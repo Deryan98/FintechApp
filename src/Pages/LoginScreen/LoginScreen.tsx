@@ -38,26 +38,16 @@ export const LoginScreen = (props: Props) => {
   const loggedIn = user !== undefined && user !== null;
 
   return (
-    <View className="flex justify-center items-center bg-gray-800">
-      <Text>Login Screen</Text>
-      {loggedIn && <Text>You are logged in as {user.name}</Text>}
-      {!loggedIn && <Text>You are not logged in</Text>}
+    <View className="h-full justify-center items-center bg-gray-800">
+      <Text className="text-white  h-[15%] font-bold text-26font">Login</Text>
+      <Text className="text-white">
+        {loggedIn
+          ? `You are logged in as ${user.name}`
+          : 'You are not logged in'}
+      </Text>
       {error && <Text className="text-red-500">{error.message}</Text>}
-      <TextInput
-        className="w-[80%] h-[40] bg-gray-500 m-5, p-5 rounded-sm"
-        placeholder="Username"
-        value={username}
-        onChangeText={text => setUsername(text)}
-      />
-      <TextInput
-        className="w-[80%] h-[40] bg-gray-500 m-5, p-5 rounded-sm"
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
       <TouchableOpacity
-        className="bg-purple-500 p-5 m-5 rounded-sm"
+        className="bg-purple-500 w-[90%] p-5 m-5 rounded-lg"
         onPress={onLogin}>
         <Text className="text-white text-center">
           Log {loggedIn ? 'Out' : 'In'}
@@ -65,9 +55,9 @@ export const LoginScreen = (props: Props) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        className="bg-purple-500 p-5 m-5 rounded-sm"
+        className="bg-red-500 w-[90%] p-5 rounded-lg"
         onPress={onLogout}>
-        <Text className="text-white text-center">Clear</Text>
+        <Text className="text-white text-center">Clear Sesion</Text>
       </TouchableOpacity>
     </View>
   );
