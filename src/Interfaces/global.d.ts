@@ -2,6 +2,7 @@ type MainStackParamList = {
   Watchlist: undefined;
   Graph: {symbol: string};
   Alert: undefined;
+  Login: undefined;
 };
 interface StockRealTime {
   s: string;
