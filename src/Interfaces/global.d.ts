@@ -2,7 +2,7 @@ type MainStackParamList = {
   Watchlist: undefined;
   Graph: {symbol: string};
   Alert: undefined;
-  Login: undefined;
+  WelcomeScreen: undefined;
   Loading: undefined;
 };
 

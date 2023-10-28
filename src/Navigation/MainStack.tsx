@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AlertScreen} from 'Pages/AlertScreen';
-import {WatchList} from 'Pages/WatchList';
+import {WatchListScreen} from 'Pages/WatchListScreen';
 import {GraphScreen} from 'Pages/GraphScreen';
-import {LoginScreen} from 'Pages/LoginScreen';
+import {WelcomeScreen} from 'Pages/WelcomeScreen';
 import {LoadingScreen} from 'Pages/LoadingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
@@ -30,7 +30,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="WelcomeScreen"
       screenOptions={{
         headerShown: true,
         headerStyle: {
@@ -48,8 +48,8 @@ export const MainStack = () => {
       {authStatus === 'not-auth' && (
         <>
           <Stack.Screen
-            name="Login"
-            component={LoginScreen}
+            name="WelcomeScreen"
+            component={WelcomeScreen}
             options={{headerShown: false}}
           />
         </>
@@ -58,7 +58,7 @@ export const MainStack = () => {
         <>
           <Stack.Screen
             name="Watchlist"
-            component={WatchList}
+            component={WatchListScreen}
             options={{headerShown: false}}
           />
 

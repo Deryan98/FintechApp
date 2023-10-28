@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StockCard} from 'Components/molecules/StockCard';
-import {Button, FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity} from 'react-native';
 
 interface StockListProps {
   data: StockRealTime[];

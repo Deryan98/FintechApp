@@ -21,13 +21,22 @@ export const StockCard: FC<StockCardProps> = ({
       <View className="w-full ">
         <Text className="text-black font-bold text-14font">{s}</Text>
       </View>
-      <View className="w-full ">
-        <Text className="text-black font-bold text-14font">{p}</Text>
-      </View>
+      {p == '' && (
+        <Text className={`text-red-800 w-full mt-2 font-bold text-12font`}>
+          Waiting for transactions
+        </Text>
+      )}
+      {p !== '' && (
+        <>
+          <View className="w-full ">
+            <Text className="text-black font-bold text-14font">{p}</Text>
+          </View>
 
-      <View className="w-full ">
-        <Text className="text-black font-bold text-14font">{v}</Text>
-      </View>
+          <View className="w-full ">
+            <Text className="text-black font-bold text-14font">{v}</Text>
+          </View>
+        </>
+      )}
     </TouchableOpacity>
   );
 };

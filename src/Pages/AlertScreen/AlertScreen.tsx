@@ -4,7 +4,6 @@ import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {useState} from 'react';
 import {
   ActivityIndicator,
-  Button,
   Text,
   TextInput,
   TouchableOpacity,
