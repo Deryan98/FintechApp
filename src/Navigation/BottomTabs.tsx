@@ -5,6 +5,7 @@ import {WatchListScreen} from 'Pages/WatchListScreen';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLineChart} from '@fortawesome/free-solid-svg-icons/faLineChart';
 import {faMoneyBillTrendUp} from '@fortawesome/free-solid-svg-icons/faMoneyBillTrendUp';
+import {Platform} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ export const BottomTabs = () => {
         screenOptions={{
           tabBarStyle: {
             backgroundColor: '#1a202c',
-            height: 60,
+            height: Platform.OS === 'ios' ? 90 : 60,
             paddingVertical: 10,
           },
           tabBarActiveTintColor: '#f7fafc',
