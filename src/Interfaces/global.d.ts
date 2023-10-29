@@ -1,10 +1,14 @@
 type MainStackParamList = {
-  Watchlist: undefined;
+  BottomTabs: undefined;
   GraphCandles: {symbol: string};
   GraphLinear: {symbol: string};
   Alert: undefined;
   WelcomeScreen: undefined;
   Loading: undefined;
+};
+
+type BottomTabsParamList = {
+  WatchList: undefined;
 };
 
 type AuthStatus = 'checking' | 'auth' | 'not-auth';

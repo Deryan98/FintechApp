@@ -1,12 +1,13 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AlertScreen} from 'Pages/AlertScreen';
-import {WatchListScreen} from 'Pages/WatchListScreen';
+// import {WatchListScreen} from 'Pages/WatchListScreen';
 import {GraphCandlesScreen} from 'Pages/GraphCandlesScreen';
 import {WelcomeScreen} from 'Pages/WelcomeScreen';
 import {LoadingScreen} from 'Pages/LoadingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
 import {useAuthStore} from 'Store/Auth';
+import {BottomTabs} from './BottomTabs';
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
@@ -57,8 +58,8 @@ export const MainStack = () => {
       {authStatus === 'auth' && (
         <>
           <Stack.Screen
-            name="Watchlist"
-            component={WatchListScreen}
+            name="BottomTabs"
+            component={BottomTabs}
             options={{headerShown: false}}
           />
 

@@ -97,4 +97,8 @@ export const useWebSocket = () => {
       console.log(symbols.size, ' closed');
     };
   }, [symbols.size]);
+
+  return {
+    stocks,
+  };
 };

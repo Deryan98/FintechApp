@@ -1,10 +1,9 @@
-import {Button, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {StockList} from 'Components/organisms/StockList/StockList';
 import {Header} from 'Components/atoms/Header';
 import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
-import {useWebSocket} from 'Hooks/useWebSocket';
 import {useWatchlist} from './useWatchlist';
 
 export type WatchListScreenProps = NativeStackScreenProps<
@@ -13,8 +12,6 @@ export type WatchListScreenProps = NativeStackScreenProps<
 >;
 
 export const WatchListScreen = ({navigation}: WatchListScreenProps) => {
-  useWebSocket();
-
   const {watchedStocks, loggedIn, onLogout, user} = useWatchlist();
 
   const renderEmptyComponent = () => {
@@ -44,7 +41,7 @@ export const WatchListScreen = ({navigation}: WatchListScreenProps) => {
         }
         right={
           <TouchableOpacity
-            className="bg-red-800 w-[70%] p-2 rounded-lg"
+            className="bg-red-800 w-[50%] p-2 ml-14 rounded-lg"
             onPress={onLogout}>
             <Text className="text-white text-center">Log Out</Text>
           </TouchableOpacity>
