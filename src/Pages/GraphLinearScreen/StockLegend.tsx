@@ -14,19 +14,25 @@ const StockLegend = ({legend, gridSize = '1'}: Props) => {
   );
   const toast = useToast();
 
-  const symbolExistInHistory = useMemo(
-    () => !!historyStocks.find(historyStock => historyStock.symbol === legend),
-    [historyStocks],
+  const symbolExistInHistory = !!historyStocks.find(
+    historyStock => historyStock.symbol === legend,
   );
 
   const onPressItem = () => {
-    if (historyStocks.length > 5) {
-      toast.show("Can't add more than 5 stocks", {
-        type: 'normal | success | warning | danger | custom',
-        placement: 'top',
-        duration: 4000,
-        animationType: 'slide-in',
-      });
+    console.log('historyStocks.length: ', historyStocks.length);
+    console.log('symbolExistInHistory: ', symbolExistInHistory);
+
+    if (historyStocks.length > 4) {
+      if (symbolExistInHistory) {
+        removeHistStock(legend);
+      } else {
+        toast.show("Can't add more than 5 stocks", {
+          type: 'normal | success | warning | danger | custom',
+          placement: 'top',
+          duration: 4000,
+          animationType: 'slide-in',
+        });
+      }
       return;
     }
     if (!symbolExistInHistory) setHistStock(legend);
