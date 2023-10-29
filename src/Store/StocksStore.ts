@@ -18,19 +18,17 @@ type StocksState = {
 
 export const useStocksStore = create<StocksState>((set, get) => ({
   symbols: new Map([
-    ['BINANCE:BTCUSDT', {symbol: 'BINANCE:BTCUSDT', targetPrice: '20'}],
     [
-      'OANDA:EUR_SGD',
-      {symbol: 'OANDA:EUR_SGD', targetPrice: '20', description: 'Apple Inc'},
+      'BINANCE:BTCUSDT',
+      {
+        symbol: 'BINANCE:BTCUSDT',
+        targetPrice: '20',
+        description: 'Binance Bitcoin Tether',
+      },
     ],
-    ['SPY', {symbol: 'SPY', targetPrice: '20'}],
   ]),
   setSymbol: symbol => set({symbols: get().symbols.set(symbol.symbol, symbol)}),
-  watchedStocks: new Map([
-    ['BINANCE:BTCUSDT', {s: 'BINANCE:BTCUSDT'}],
-    ['OANDA:EUR_SGD', {s: 'OANDA:EUR_SGD'}],
-    ['SPY', {s: 'SPY'}],
-  ]),
+  watchedStocks: new Map([['BINANCE:BTCUSDT', {s: 'BINANCE:BTCUSDT'}]]),
   setWatchedStock: watchedStock =>
     set({watchedStocks: get().watchedStocks.set(watchedStock.s, watchedStock)}),
   editWatchedStock: newItem =>

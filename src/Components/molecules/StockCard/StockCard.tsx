@@ -1,4 +1,5 @@
 import {P} from 'Components/atoms/Text/Text';
+import {useStocksStore} from 'Store/StocksStore';
 import {FC} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
@@ -16,13 +17,24 @@ export const StockCard: FC<StockCardProps> = ({
   onPress,
   onLongPress = () => {},
 }) => {
+  const {symbols} = useStocksStore();
+
+  const selectedSymbol = symbols.get(s);
+
+  const formatPercentaje = (Number.parseFloat(v) * 100).toFixed(2);
+
   return (
     <TouchableOpacity
       onPress={onPress}
       onLongPress={onLongPress}
-      className="w-[47%] h-[100] items-center justify-center p-5 bg-gray-500 rounded-lg my-2 mr-5">
+      className="w-[47%] h-auto items-center justify-center p-5 bg-gray-500 rounded-lg my-2 mr-5">
       <View className="w-full ">
-        <Text className="text-black font-bold text-14font">{s}</Text>
+        <Text className="text-black font-bold text-14font">
+          {s}
+          {selectedSymbol?.description
+            ? `- ${selectedSymbol?.description}`
+            : ''}
+        </Text>
       </View>
       {p == '' && (
         <Text className={`text-red-800 w-full mt-2 font-bold text-12font`}>
@@ -33,12 +45,14 @@ export const StockCard: FC<StockCardProps> = ({
         <>
           <View className="w-full ">
             <Text className="text-black font-bold text-14font">
-              ${Number(p).toFixed(2)}
+              $ {Number(p).toFixed(2)}
             </Text>
           </View>
 
           <View className="w-full ">
-            <Text className="text-black font-bold text-14font">{v}</Text>
+            <Text className="text-black font-bold text-14font">
+              {formatPercentaje} %
+            </Text>
           </View>
         </>
       )}

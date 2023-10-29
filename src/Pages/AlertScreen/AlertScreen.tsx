@@ -45,7 +45,12 @@ export const AlertScreen = (props: Props) => {
     const isValid = validateForm();
     if (!isValid) return;
     if (symbols.size === 0) setWatchedStock({s: 'BINANCE:BTCUSDT'});
-    setSymbol({symbol: value!, targetPrice});
+    const selectedSymbol = stockSymbols.find(item => item.value === value);
+    setSymbol({
+      symbol: value!,
+      targetPrice,
+      description: selectedSymbol?.label,
+    });
     setWatchedStock({s: value});
     navigation.goBack();
   };
