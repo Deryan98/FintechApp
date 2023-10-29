@@ -4,7 +4,6 @@ import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {LinearGraph} from './LinearGraph';
 import {useStocksStore} from 'Store/Stocks';
 import {StockListLegend} from './StockListLegend';
-import {useLinearGraphStore} from 'Store/LinearGraph';
 
 type Props = {};
 

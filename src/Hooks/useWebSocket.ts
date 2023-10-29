@@ -4,10 +4,12 @@ import {useEffect, useState} from 'react';
 import * as _ from 'lodash';
 import {useDebounce} from './useDebounce';
 import PushNotification from 'react-native-push-notification';
+import {useLinearGraphStore} from 'Store/LinearGraph';
 
 export const useWebSocket = () => {
   //retrieve states from zustand
   const {symbols, editWatchedStock, setSymbol} = useStocksStore(state => state);
+  const {setTransactStock} = useLinearGraphStore(state => state);
 
   //state to manage remote stocks
   const [stocks, setStocks] = useState([]);
@@ -57,6 +59,7 @@ export const useWebSocket = () => {
           }
         }
 
+        setTransactStock(preStock);
         editWatchedStock(preStock);
       });
     } catch (error) {

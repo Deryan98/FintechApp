@@ -33,7 +33,6 @@ const StockLegend = ({legend, gridSize = '1'}: Props) => {
     else removeHistStock(legend);
   };
 
-  console.log({symbolExistInHistory});
   return (
     <TouchableOpacity
       onPress={onPressItem}
