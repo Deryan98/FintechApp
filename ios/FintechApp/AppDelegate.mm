@@ -18,13 +18,11 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  return [super application:application didFinishLaunchingWithOptions:launchOptions];
-
   // Define UNUserNotificationCenter
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
 
-  return YES;
+  return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 //Called when a notification is delivered to a foreground app.
