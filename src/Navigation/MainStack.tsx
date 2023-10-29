@@ -64,7 +64,11 @@ export const MainStack = () => {
           />
 
           <Stack.Screen name="GraphCandles" component={GraphCandlesScreen} />
-          <Stack.Screen name="Alert" component={AlertScreen} />
+          <Stack.Screen
+            name="Alert"
+            component={AlertScreen}
+            options={{title: 'Add New Stock'}}
+          />
         </>
       )}
     </Stack.Navigator>
