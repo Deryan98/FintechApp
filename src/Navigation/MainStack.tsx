@@ -12,22 +12,17 @@ import {BottomTabs} from './BottomTabs';
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
 export const MainStack = () => {
-  const [token, setToken] = useState<string | null>(null);
   const {authStatus, setAuthStatus} = useAuthStore(state => state);
 
   useEffect(() => {
     const retrieveToken = async () => {
       const tokenResponse = await AsyncStorage.getItem('@token');
-      setToken(tokenResponse);
+      if (!tokenResponse) setAuthStatus('not-auth');
+      else setAuthStatus('auth');
     };
 
     retrieveToken();
   }, []);
-
-  useEffect(() => {
-    if (!token) setAuthStatus('not-auth');
-    else setAuthStatus('auth');
-  }, [token]);
 
   return (
     <Stack.Navigator
@@ -58,7 +53,7 @@ export const MainStack = () => {
       {authStatus === 'auth' && (
         <>
           <Stack.Screen
-            name="BottomTabs"
+            name="Home"
             component={BottomTabs}
             options={{headerShown: false}}
           />

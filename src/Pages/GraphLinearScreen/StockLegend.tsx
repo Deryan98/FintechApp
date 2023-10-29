@@ -19,9 +19,6 @@ const StockLegend = ({legend, gridSize = '1'}: Props) => {
   );
 
   const onPressItem = () => {
-    console.log('historyStocks.length: ', historyStocks.length);
-    console.log('symbolExistInHistory: ', symbolExistInHistory);
-
     if (historyStocks.length > 4) {
       if (symbolExistInHistory) {
         removeHistStock(legend);
