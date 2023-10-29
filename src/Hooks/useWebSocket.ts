@@ -39,19 +39,19 @@ export const useWebSocket = () => {
       });
       if (preStocks.length === 0) return;
       preStocks.forEach(preStock => {
-        console.log('enn foer');
-        console.log(symbols.get(preStock.s));
+        // console.log('enn foer');
+        // console.log(symbols.get(preStock.s));
         const symbol = symbols.get(preStock.s);
         const targetPriceP = Number.parseFloat(symbol?.targetPrice!);
 
         if (!symbol?.notified) {
           if (targetPriceP <= preStock.p!) {
-            console.log(
-              'preStock.p: ',
-              preStock.p,
-              ' && targetPriceP: ',
-              targetPriceP,
-            );
+            // console.log(
+            //   'preStock.p: ',
+            //   preStock.p,
+            //   ' && targetPriceP: ',
+            //   targetPriceP,
+            // );
             setSymbol({...symbol!, notified: true});
             notifyHighPrice(preStock);
           }

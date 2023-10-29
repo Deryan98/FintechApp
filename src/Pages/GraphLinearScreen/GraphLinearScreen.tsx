@@ -1,21 +1,32 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {BodyContainer} from 'Components/atoms/BodyContainer';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {LinearGraph} from './LinearGraph';
+import {useStocksStore} from 'Store/Stocks';
+import {StockListLegend} from './StockListLegend';
+import {useLinearGraphStore} from 'Store/LinearGraph';
 
 type Props = {};
 
 const GraphLinearScreen = (props: Props) => {
+  const {symbols} = useStocksStore(state => state);
+  const symbolsArray = Array.from(symbols.values());
+
   return (
     <>
       <SafeAVContainer>
         <BodyContainer>
-          <View className="flex">
-            <Text className="text-white text-22font h-[40px] text-center my-10">
+          <ScrollView className="flex">
+            <Text className="text-white text-22font h-[40px] text-center my-5">
               Real Time Graphic
             </Text>
             <LinearGraph />
-          </View>
+            <StockListLegend
+              headerLegend="Select a list of 5 stocks to see in graph"
+              data={symbolsArray}
+              bg="gray-900"
+            />
+          </ScrollView>
         </BodyContainer>
       </SafeAVContainer>
     </>

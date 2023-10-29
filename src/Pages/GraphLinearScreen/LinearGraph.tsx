@@ -46,7 +46,6 @@ export const LinearGraph = (props: Props) => {
         paddingVertical: 0,
         // paddingLeft: 20,
         backgroundColor: '#1C1C1C',
-        flex: 1,
       }}>
       <LineChart
         areaChart

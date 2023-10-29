@@ -23,7 +23,7 @@ export const StockCard: FC<StockCardProps> = ({
       </View>
       {p == '' && (
         <Text className={`text-red-800 w-full mt-2 font-bold text-12font`}>
-          Waiting for transactions
+          Waiting ...
         </Text>
       )}
       {p !== '' && (
