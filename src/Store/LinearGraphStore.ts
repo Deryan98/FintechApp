@@ -1,55 +1,5 @@
 import {create} from 'zustand';
-
-type OpaqueColorValue = symbol & {__TYPE__: 'Color'};
-type ColorValue = string | OpaqueColorValue;
-type TransactStock = {
-  value: number;
-  label?: String;
-  labelComponent?: Function;
-  labelTextStyle?: any;
-  dataPointText?: string;
-  textShiftX?: number;
-  textShiftY?: number;
-  textColor?: string;
-  textFontSize?: number;
-
-  hideDataPoint?: boolean;
-  dataPointHeight?: number;
-  dataPointWidth?: number;
-  dataPointRadius?: number;
-  dataPointColor?: string;
-  dataPointShape?: string;
-  customDataPoint?: Function;
-
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | String | any;
-  stripOpacity?: number;
-
-  focusedDataPointShape?: String;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | String | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-
-  dataPointLabelComponent?: Function;
-  focusedDataPointLabelComponent?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
-  showStrip?: boolean;
-
-  showVerticalLine?: boolean;
-  verticalLineUptoDataPoint?: boolean;
-  verticalLineColor?: string;
-  verticalLineThickness?: number;
-  verticalLineStrokeDashArray?: Array<number>;
-  pointerShiftX?: number;
-  pointerShiftY?: number;
-  onPress?: Function;
-  showXAxisIndex?: boolean;
-};
+import moment from 'moment';
 
 type HistoryStock = {
   symbol: string;
@@ -57,6 +7,7 @@ type HistoryStock = {
 };
 
 type LinearGraphState = {
+  counter: number;
   historyStocks: HistoryStock[];
   setHistStock: (symbol: string) => void;
   removeHistStock: (symbol: string) => void;
@@ -64,6 +15,7 @@ type LinearGraphState = {
 };
 
 export const useLinearGraphStore = create<LinearGraphState>((set, get) => ({
+  counter: 0,
   historyStocks: [{symbol: 'BINANCE:BTCUSDT', transactStocks: []}],
   setHistStock: symbol =>
     set({
@@ -91,7 +43,7 @@ export const useLinearGraphStore = create<LinearGraphState>((set, get) => ({
           historyStock => historyStock.symbol === newStock.s,
         )
       ) {
-        return {historyStocks: get().historyStocks};
+        return {historyStocks: get().historyStocks, counter: get().counter + 1};
       }
 
       const indexToChange = get()
@@ -100,50 +52,46 @@ export const useLinearGraphStore = create<LinearGraphState>((set, get) => ({
 
       const newHistoryStocks = [...get().historyStocks];
 
+      const hasLabel = get().counter % 5 === 0;
+      const timeFormatted = newStock.t
+        ? moment(newStock.t).format('HH:mm:ss')
+        : '';
+
+      console.log(timeFormatted);
+
       if (newHistoryStocks[indexToChange].transactStocks.length > 35) {
         const selectedTransactStocks = [
           ...newHistoryStocks[indexToChange].transactStocks,
         ];
         selectedTransactStocks.shift();
+
         newHistoryStocks[indexToChange] = {
           symbol: newStock.s,
           transactStocks: [
             ...selectedTransactStocks,
             {
-              value:
-                newStock?.p ??
-                newHistoryStocks[indexToChange].transactStocks[
-                  newHistoryStocks[indexToChange].transactStocks.length - 1
-                ].value,
-              label:
-                newStock.t?.toString() ??
-                newHistoryStocks[indexToChange].transactStocks[
-                  newHistoryStocks[indexToChange].transactStocks.length - 1
-                ].label,
+              value: newStock?.p!,
+              label: timeFormatted,
+              date: timeFormatted,
+              labelTextStyle: hasLabel ? {color: 'lightgray', width: 60} : {},
             },
           ],
         };
-        return {historyStocks: newHistoryStocks};
+        return {historyStocks: newHistoryStocks, counter: get().counter + 1};
       } else {
         newHistoryStocks[indexToChange] = {
           symbol: newStock.s,
           transactStocks: [
             ...newHistoryStocks[indexToChange].transactStocks,
             {
-              value:
-                newStock?.p ??
-                newHistoryStocks[indexToChange].transactStocks[
-                  newHistoryStocks[indexToChange].transactStocks.length - 1
-                ].value,
-              label:
-                newStock.t?.toString() ??
-                newHistoryStocks[indexToChange].transactStocks[
-                  newHistoryStocks[indexToChange].transactStocks.length - 1
-                ].label,
+              value: newStock?.p!,
+              label: timeFormatted,
+              date: timeFormatted,
+              labelTextStyle: hasLabel ? {color: 'lightgray', width: 60} : {},
             },
           ],
         };
-        return {historyStocks: newHistoryStocks};
+        return {historyStocks: newHistoryStocks, counter: get().counter + 1};
       }
     }),
 }));

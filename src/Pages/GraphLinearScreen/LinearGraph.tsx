@@ -1,7 +1,6 @@
-import {Dimensions, View} from 'react-native';
+import {Dimensions, Text, View} from 'react-native';
 import {LineChart} from 'react-native-gifted-charts';
 import {useLinearGraphStore} from 'Store/LinearGraphStore';
-import {PointerLabelComponent} from './PointerLabelComponent';
 
 type Props = {};
 
@@ -50,11 +49,13 @@ export const LinearGraph = (props: Props) => {
         endOpacity={0.2}
         initialSpacing={0}
         noOfSections={6}
-        maxValue={40000}
+        maxValue={100000}
         yAxisColor="white"
         yAxisThickness={0}
+        yAxisLabelWidth={60}
         rulesType="solid"
         rulesColor="gray"
+        height={Dimensions.get('window').height / 2.5}
         yAxisTextStyle={{color: 'gray'}}
         xAxisColor="lightgray"
         pointerConfig={{
@@ -67,7 +68,40 @@ export const LinearGraph = (props: Props) => {
           pointerLabelHeight: 90,
           activatePointersOnLongPress: true,
           autoAdjustPointerLabelPosition: false,
-          pointerLabelComponent: PointerLabelComponent,
+          pointerLabelComponent: items => {
+            return (
+              <View
+                style={{
+                  height: 90,
+                  width: 100,
+                  justifyContent: 'center',
+                  marginTop: -30,
+                  marginLeft: -40,
+                }}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 14,
+                    marginBottom: 6,
+                    textAlign: 'center',
+                  }}>
+                  {items[0].date}
+                </Text>
+
+                <View
+                  style={{
+                    paddingHorizontal: 14,
+                    paddingVertical: 6,
+                    borderRadius: 16,
+                    backgroundColor: 'white',
+                  }}>
+                  <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
+                    {'$' + items[0].value + '.0'}
+                  </Text>
+                </View>
+              </View>
+            );
+          },
         }}
       />
     </View>

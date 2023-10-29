@@ -1,4 +1,4 @@
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text, Platform} from 'react-native';
 import StockLegend from './StockLegend';
 
 type Symbol = {
@@ -22,7 +22,9 @@ export const StockListLegend = ({
 }: Props) => {
   const gridSize = data.length.toString();
   return (
-    <View className={`mt-${mt} items-center`} style={{marginTop: 30}}>
+    <View
+      className={`mt-${mt} items-center`}
+      style={{marginTop: Platform.OS === 'ios' ? 80 : 30}}>
       <View className={`bg-${bg} w-[90%] py-1 rounded-3xl`}>
         <Text className="text-white font-semi text-16font text-center">
           {headerLegend}
