@@ -1,7 +1,9 @@
 import {FC} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StockCard} from 'Components/molecules/StockCard';
-import {FlatList, Text, View, TouchableOpacity} from 'react-native';
+import {FlatList, Text, View, TouchableOpacity, Alert} from 'react-native';
+import {useStocksStore} from 'Store/Stocks';
+import {useLinearGraphStore} from 'Store/LinearGraph';
 
 interface StockListProps {
   data: StockRealTime[];
@@ -9,6 +11,26 @@ interface StockListProps {
 
 export const StockList: FC<StockListProps> = ({data}) => {
   const navigation = useNavigation();
+
+  const {removeStock} = useStocksStore(state => state);
+  const {removeHistStock} = useLinearGraphStore(state => state);
+
+  const handleOnLongPress = (symbol: string) => {
+    Alert.alert('Delete a stock', `Do you want to remove ${symbol} stock?`, [
+      {
+        text: 'Confirm',
+        onPress: () => {
+          removeStock(symbol);
+          removeHistStock(symbol);
+        },
+      },
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+    ]);
+  };
 
   return (
     <FlatList
@@ -35,6 +57,7 @@ export const StockList: FC<StockListProps> = ({data}) => {
               console.log(item.s);
               navigation.navigate('GraphCandles', {symbol: item.s});
             }}
+            onLongPress={() => handleOnLongPress(item.s)}
           />
         );
       }}

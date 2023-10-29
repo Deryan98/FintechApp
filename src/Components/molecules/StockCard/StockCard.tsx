@@ -4,6 +4,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 
 interface StockCardProps extends StockRealTime {
   onPress: any;
+  onLongPress?: any;
 }
 
 export const StockCard: FC<StockCardProps> = ({
@@ -13,10 +14,12 @@ export const StockCard: FC<StockCardProps> = ({
   t,
   v = '',
   onPress,
+  onLongPress = () => {},
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      onLongPress={onLongPress}
       className="w-[47%] h-[100] items-center justify-center p-5 bg-gray-500 rounded-lg my-2 mr-5">
       <View className="w-full ">
         <Text className="text-black font-bold text-14font">{s}</Text>

@@ -12,6 +12,7 @@ type StocksState = {
   watchedStocks: Map<string, StockRealTime>;
   setWatchedStock: (watchedStock: StockRealTime) => void;
   editWatchedStock: (newItem: StockRealTime) => void;
+  removeStock: (symbol: string) => void;
 };
 
 export const useStocksStore = create<StocksState>((set, get) => ({
@@ -30,4 +31,12 @@ export const useStocksStore = create<StocksState>((set, get) => ({
     set({watchedStocks: get().watchedStocks.set(watchedStock.s, watchedStock)}),
   editWatchedStock: newItem =>
     set({watchedStocks: get().watchedStocks.set(newItem.s, newItem)}),
+  removeStock: symbol =>
+    set(() => {
+      const filteredWatchedStocks = get().watchedStocks;
+      filteredWatchedStocks.delete(symbol);
+      const filteredSymbols = get().symbols;
+      filteredSymbols.delete(symbol);
+      return {watchedStocks: filteredWatchedStocks, symbols: filteredSymbols};
+    }),
 }));
