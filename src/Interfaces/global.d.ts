@@ -1,6 +1,7 @@
 type MainStackParamList = {
   Watchlist: undefined;
-  Graph: {symbol: string};
+  GraphCandles: {symbol: string};
+  GraphLinear: {symbol: string};
   Alert: undefined;
   WelcomeScreen: undefined;
   Loading: undefined;

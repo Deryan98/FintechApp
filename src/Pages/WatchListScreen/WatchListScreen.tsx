@@ -7,9 +7,12 @@ import {BodyContainer} from 'Components/atoms/BodyContainer/BodyContainer';
 import {useWebSocket} from 'Hooks/useWebSocket';
 import {useWatchlist} from './useWatchlist';
 
-type Props = NativeStackScreenProps<MainStackParamList, 'Watchlist'>;
+export type WatchListScreenProps = NativeStackScreenProps<
+  MainStackParamList,
+  'Watchlist'
+>;
 
-export const WatchListScreen = ({navigation}: Props) => {
+export const WatchListScreen = ({navigation}: WatchListScreenProps) => {
   useWebSocket();
 
   const {watchedStocks, loggedIn, onLogout, user} = useWatchlist();

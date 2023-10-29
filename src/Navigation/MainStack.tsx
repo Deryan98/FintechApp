@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AlertScreen} from 'Pages/AlertScreen';
 import {WatchListScreen} from 'Pages/WatchListScreen';
-import {GraphScreen} from 'Pages/GraphScreen';
+import {GraphCandlesScreen} from 'Pages/GraphCandlesScreen';
 import {WelcomeScreen} from 'Pages/WelcomeScreen';
 import {LoadingScreen} from 'Pages/LoadingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -62,7 +62,7 @@ export const MainStack = () => {
             options={{headerShown: false}}
           />
 
-          <Stack.Screen name="Graph" component={GraphScreen} />
+          <Stack.Screen name="GraphCandles" component={GraphCandlesScreen} />
           <Stack.Screen name="Alert" component={AlertScreen} />
         </>
       )}

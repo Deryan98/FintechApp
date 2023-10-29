@@ -31,9 +31,7 @@ export const StockList: FC<StockListProps> = ({data}) => {
             onPress={() => {
               console.log('navigate');
               console.log(item.s);
-              navigation.navigate('Graph', {
-                symbol: item.s,
-              });
+              navigation.navigate('GraphCandles', {symbol: item.s});
             }}
           />
         );
