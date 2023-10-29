@@ -3,6 +3,7 @@ import {create} from 'zustand';
 type Symbol = {
   symbol: string;
   targetPrice: string;
+  description?: string;
   notified?: boolean;
 };
 
@@ -18,14 +19,17 @@ type StocksState = {
 export const useStocksStore = create<StocksState>((set, get) => ({
   symbols: new Map([
     ['BINANCE:BTCUSDT', {symbol: 'BINANCE:BTCUSDT', targetPrice: '20'}],
-    ['AAPL', {symbol: 'AAPL', targetPrice: '20'}],
-    ['IC MARKETS:1', {symbol: 'IC MARKETS:1', targetPrice: '20'}],
+    [
+      'OANDA:EUR_SGD',
+      {symbol: 'OANDA:EUR_SGD', targetPrice: '20', description: 'Apple Inc'},
+    ],
+    ['SPY', {symbol: 'SPY', targetPrice: '20'}],
   ]),
   setSymbol: symbol => set({symbols: get().symbols.set(symbol.symbol, symbol)}),
   watchedStocks: new Map([
     ['BINANCE:BTCUSDT', {s: 'BINANCE:BTCUSDT'}],
-    ['AAPL', {s: 'AAPL'}],
-    ['IC MARKETS:1', {s: 'IC MARKETS:1'}],
+    ['OANDA:EUR_SGD', {s: 'OANDA:EUR_SGD'}],
+    ['SPY', {s: 'SPY'}],
   ]),
   setWatchedStock: watchedStock =>
     set({watchedStocks: get().watchedStocks.set(watchedStock.s, watchedStock)}),

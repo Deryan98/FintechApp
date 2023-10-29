@@ -11,9 +11,8 @@ import {
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {useAlertScreen} from './useAlertScreen';
-import {useStocksStore} from 'Store/Stocks';
+import {useStocksStore} from 'Store/StocksStore';
 import {useNavigation} from '@react-navigation/native';
-import {useLinearGraphStore} from 'Store/LinearGraph';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Alert'>;
 

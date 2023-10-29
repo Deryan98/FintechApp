@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAuthStore} from 'Store/Auth';
+import {useAuthStore} from 'Store/AuthStore';
 import {useAuth0} from 'react-native-auth0';
 
 export const useWelcome = () => {

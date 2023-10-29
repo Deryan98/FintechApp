@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAuthStore} from 'Store/Auth';
-import {useStocksStore} from 'Store/Stocks';
+import {useAuthStore} from 'Store/AuthStore';
+import {useStocksStore} from 'Store/StocksStore';
 import {useAuth0} from 'react-native-auth0';
 
 export const useWatchlist = () => {

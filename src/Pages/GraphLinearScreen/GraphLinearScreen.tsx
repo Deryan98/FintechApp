@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {BodyContainer} from 'Components/atoms/BodyContainer';
 import {SafeAVContainer} from 'Components/atoms/SafeAVContainer';
 import {LinearGraph} from './LinearGraph';
-import {useStocksStore} from 'Store/Stocks';
+import {useStocksStore} from 'Store/StocksStore';
 import {StockListLegend} from './StockListLegend';
 
 type Props = {};

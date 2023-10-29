@@ -2,7 +2,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useAuth0} from 'react-native-auth0';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAuthStore} from 'Store/Auth';
+import {useAuthStore} from 'Store/AuthStore';
 import {useWelcome} from './useWelcome';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'WelcomeScreen'>;

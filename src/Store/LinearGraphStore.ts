@@ -65,9 +65,9 @@ type LinearGraphState = {
 
 export const useLinearGraphStore = create<LinearGraphState>((set, get) => ({
   historyStocks: [
-    {symbol: 'AAPL', transactStocks: []},
     {symbol: 'BINANCE:BTCUSDT', transactStocks: []},
-    {symbol: 'IC MARKETS:1', transactStocks: []},
+    {symbol: 'OANDA:EUR_SGD', transactStocks: []},
+    {symbol: 'TSLA', transactStocks: []},
   ],
   setHistStock: symbol =>
     set({

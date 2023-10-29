@@ -1,10 +1,10 @@
 import {API_KEY} from '@env';
-import {useStocksStore} from 'Store/Stocks';
+import {useStocksStore} from 'Store/StocksStore';
 import {useEffect, useState} from 'react';
 import * as _ from 'lodash';
 import {useDebounce} from './useDebounce';
 import PushNotification from 'react-native-push-notification';
-import {useLinearGraphStore} from 'Store/LinearGraph';
+import {useLinearGraphStore} from 'Store/LinearGraphStore';
 
 export const useWebSocket = () => {
   //retrieve states from zustand

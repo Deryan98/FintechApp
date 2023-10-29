@@ -1,6 +1,6 @@
 import {Dimensions, View} from 'react-native';
 import {LineChart} from 'react-native-gifted-charts';
-import {useLinearGraphStore} from 'Store/LinearGraph';
+import {useLinearGraphStore} from 'Store/LinearGraphStore';
 import {PointerLabelComponent} from './PointerLabelComponent';
 
 type Props = {};
