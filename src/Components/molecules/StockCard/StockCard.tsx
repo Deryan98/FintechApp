@@ -33,7 +33,7 @@ export const StockCard: FC<StockCardProps> = ({
         <>
           <View className="w-full ">
             <Text className="text-black font-bold text-14font">
-              {Number(p).toFixed(2)}
+              ${Number(p).toFixed(2)}
             </Text>
           </View>
 

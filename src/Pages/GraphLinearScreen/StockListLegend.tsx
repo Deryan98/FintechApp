@@ -22,7 +22,7 @@ export const StockListLegend = ({
 }: Props) => {
   const gridSize = data.length.toString();
   return (
-    <View className={`mt-${mt} items-center`}>
+    <View className={`mt-${mt} items-center`} style={{marginTop: 30}}>
       <View className={`bg-${bg} w-[90%] py-1 rounded-3xl`}>
         <Text className="text-white font-semi text-16font text-center">
           {headerLegend}
