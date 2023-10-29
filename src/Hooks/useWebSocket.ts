@@ -18,10 +18,10 @@ export const useWebSocket = () => {
   const stocksDbc = useDebounce(stocks);
 
   const notifyHighPrice = ({s, p}: StockRealTime) => {
-    console.log('notifyHighPrice doing');
     PushNotification.localNotification({
       channelId: 'stock-alert',
-      title: `${s} stock reached $${p}`,
+      title: 'High price reached',
+      message: `${s} stock reached $${p}`,
     });
   };
 
@@ -41,19 +41,11 @@ export const useWebSocket = () => {
       });
       if (preStocks.length === 0) return;
       preStocks.forEach(preStock => {
-        // console.log('enn foer');
-        // console.log(symbols.get(preStock.s));
         const symbol = symbols.get(preStock.s);
         const targetPriceP = Number.parseFloat(symbol?.targetPrice!);
 
         if (!symbol?.notified) {
-          if (targetPriceP <= preStock.p!) {
-            // console.log(
-            //   'preStock.p: ',
-            //   preStock.p,
-            //   ' && targetPriceP: ',
-            //   targetPriceP,
-            // );
+          if (preStock.p! >= targetPriceP) {
             setSymbol({...symbol!, notified: true});
             notifyHighPrice(preStock);
           }

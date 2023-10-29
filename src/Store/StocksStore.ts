@@ -18,7 +18,7 @@ type StocksState = {
 
 export const useStocksStore = create<StocksState>((set, get) => ({
   symbols: new Map([
-    ['BINANCE:BTCUSDT', {symbol: 'BINANCE:BTCUSDT', targetPrice: '20'}],
+    ['BINANCE:BTCUSDT', {symbol: 'BINANCE:BTCUSDT', targetPrice: '34605'}],
     [
       'OANDA:EUR_SGD',
       {symbol: 'OANDA:EUR_SGD', targetPrice: '20', description: 'Apple Inc'},

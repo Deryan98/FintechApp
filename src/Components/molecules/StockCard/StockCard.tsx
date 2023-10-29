@@ -32,7 +32,9 @@ export const StockCard: FC<StockCardProps> = ({
       {p !== '' && (
         <>
           <View className="w-full ">
-            <Text className="text-black font-bold text-14font">{p}</Text>
+            <Text className="text-black font-bold text-14font">
+              {Number(p).toFixed(2)}
+            </Text>
           </View>
 
           <View className="w-full ">
