@@ -24,7 +24,7 @@ export const StockListLegend = ({
   return (
     <View
       className={`mt-${mt} items-center`}
-      style={{marginTop: Platform.OS === 'ios' ? 80 : 30}}>
+      style={{marginTop: Platform.OS === 'ios' ? 80 : 60}}>
       <View className={`bg-${bg} w-[90%] py-1 rounded-3xl`}>
         <Text className="text-white font-semi text-16font text-center">
           {headerLegend}
