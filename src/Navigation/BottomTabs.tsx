@@ -2,6 +2,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SocketProvider} from 'Context/SocketContext';
 import GraphLinearScreen from 'Pages/GraphLinearScreen/GraphLinearScreen';
 import {WatchListScreen} from 'Pages/WatchListScreen';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faLineChart} from '@fortawesome/free-solid-svg-icons/faLineChart';
+import {faMoneyBillTrendUp} from '@fortawesome/free-solid-svg-icons/faMoneyBillTrendUp';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +26,13 @@ export const BottomTabs = () => {
           component={WatchListScreen}
           options={{
             headerShown: false,
+            tabBarIcon: ({color, size}) => (
+              <FontAwesomeIcon
+                icon={faMoneyBillTrendUp}
+                color={color}
+                size={size}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -36,6 +46,9 @@ export const BottomTabs = () => {
             headerTintColor: 'white',
             headerTitle: 'Linear Graph',
             tabBarLabel: 'Linear Graph',
+            tabBarIcon: ({color, size}) => (
+              <FontAwesomeIcon icon={faLineChart} color={color} size={size} />
+            ),
           }}
         />
       </Tab.Navigator>

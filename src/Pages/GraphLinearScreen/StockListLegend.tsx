@@ -17,7 +17,7 @@ type Props = {
 export const StockListLegend = ({
   data,
   headerLegend,
-  mt = '16',
+  mt = '14',
   bg = '',
 }: Props) => {
   const gridSize = data.length.toString();
