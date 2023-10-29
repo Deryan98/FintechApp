@@ -4,7 +4,9 @@ import {useEffect, useState} from 'react';
 import * as _ from 'lodash';
 import {useDebounce} from './useDebounce';
 import PushNotification from 'react-native-push-notification';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useLinearGraphStore} from 'Store/LinearGraphStore';
+import {Platform} from 'react-native';
 
 export const useWebSocket = () => {
   //retrieve states from zustand
@@ -18,11 +20,23 @@ export const useWebSocket = () => {
   const stocksDbc = useDebounce(stocks);
 
   const notifyHighPrice = ({s, p}: StockRealTime) => {
-    PushNotification.localNotification({
-      channelId: 'stock-alert',
-      title: 'High price reached',
-      message: `${s} stock reached $${p}`,
-    });
+    const title = 'High price reached';
+    const message = `${s} stock reached $${p}`;
+    if (Platform.OS === 'android') {
+      PushNotification.localNotification({
+        channelId: 'stock-alert',
+        title,
+        message,
+      });
+    }
+    if (Platform.OS === 'ios') {
+      console.log('ENtro al ios noti');
+      PushNotificationIOS.addNotificationRequest({
+        id: s,
+        title: title,
+        body: message,
+      });
+    }
   };
 
   // transform data, selecting values and saving state
