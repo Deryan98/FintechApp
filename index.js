@@ -2,7 +2,7 @@
  * @format
  */
 
-import {AppRegistry, Platform} from 'react-native';
+import {AppRegistry, Platform, PermissionsAndroid} from 'react-native';
 import App from './src/FintechApp';
 import {name as appName} from './app.json';
 import PushNotification from 'react-native-push-notification';
@@ -13,6 +13,18 @@ PushNotification.configure({
   },
 
   requestPermissions: Platform.OS === 'ios',
+});
+
+PushNotification.checkPermissions(async ({alert}) => {
+  if (!alert) {
+    if (Platform.OS === 'android') {
+      try {
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        );
+      } catch (error) {}
+    }
+  }
 });
 
 PushNotification.createChannel(
