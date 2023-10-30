@@ -21,7 +21,7 @@ export const StockCard: FC<StockCardProps> = ({
 
   const selectedSymbol = symbols.get(s);
 
-  const formatPercentaje = (Number.parseFloat(v) * 100).toFixed(2);
+  const formatPercentaje = Number.parseFloat(v).toFixed(2);
 
   return (
     <TouchableOpacity
