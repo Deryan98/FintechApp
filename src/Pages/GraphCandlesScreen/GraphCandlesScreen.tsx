@@ -77,7 +77,7 @@ export const GraphCandlesScreen = ({route: {params}}: Props) => {
               xAxis={{
                 textColor: processColor('#fff'),
                 valueFormatter: 'date',
-                valueFormatterPattern: 'dd MMM',
+                valueFormatterPattern: 'dd MMM YYYY',
               }}
               yAxis={{
                 textColor: processColor('#fff'),
@@ -93,9 +93,6 @@ export const GraphCandlesScreen = ({route: {params}}: Props) => {
                 axisDependency: 'LEFT',
               }}
             />
-          </View>
-          <View style={{flex: 1}}>
-            <Text>h</Text>
           </View>
         </BodyContainer>
       </SafeAVContainer>

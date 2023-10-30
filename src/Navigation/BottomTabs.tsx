@@ -19,8 +19,10 @@ export const BottomTabs = () => {
             height: Platform.OS === 'ios' ? 80 : 70,
             paddingBottom: Platform.OS === 'ios' ? 25 : 15,
           },
+
           tabBarActiveTintColor: '#f7fafc',
           tabBarInactiveTintColor: '#a0aec0',
+          tabBarHideOnKeyboard: true,
         }}>
         <Tab.Screen
           name="Watchlist"

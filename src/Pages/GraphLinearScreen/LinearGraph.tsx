@@ -2,9 +2,11 @@ import {Dimensions, Text, View} from 'react-native';
 import {LineChart} from 'react-native-gifted-charts';
 import {useLinearGraphStore} from 'Store/LinearGraphStore';
 
-type Props = {};
+type Props = {
+  maxValue: string;
+};
 
-export const LinearGraph = (props: Props) => {
+export const LinearGraph = ({maxValue}: Props) => {
   const {historyStocks} = useLinearGraphStore(state => state);
 
   const dataArray = historyStocks.filter(
@@ -49,7 +51,7 @@ export const LinearGraph = (props: Props) => {
         endOpacity={0.2}
         initialSpacing={0}
         noOfSections={6}
-        maxValue={100000}
+        maxValue={maxValue}
         yAxisColor="white"
         yAxisThickness={0}
         yAxisLabelWidth={60}

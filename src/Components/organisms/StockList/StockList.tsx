@@ -50,15 +50,7 @@ export const StockList: FC<StockListProps> = ({data}) => {
       }
       renderItem={({index, item}) => {
         return (
-          <StockCard
-            {...item}
-            onPress={() => {
-              console.log('navigate');
-              console.log(item.s);
-              navigation.navigate('GraphCandles', {symbol: item.s});
-            }}
-            onLongPress={() => handleOnLongPress(item.s)}
-          />
+          <StockCard {...item} onLongPress={() => handleOnLongPress(item.s)} />
         );
       }}
     />

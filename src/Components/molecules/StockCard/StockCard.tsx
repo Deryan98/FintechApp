@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 interface StockCardProps extends StockRealTime {
-  onPress: any;
+  onPress?: any;
   onLongPress?: any;
 }
 
@@ -14,7 +14,7 @@ export const StockCard: FC<StockCardProps> = ({
   s,
   t,
   v = '',
-  onPress,
+  onPress = () => {},
   onLongPress = () => {},
 }) => {
   const {symbols} = useStocksStore();
